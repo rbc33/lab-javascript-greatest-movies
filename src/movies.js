@@ -29,7 +29,6 @@ function scoresAverage(moviesArray) {
 	const avg = sum / moviesArray.length
 	const round = parseFloat(avg.toFixed(2))
 
-	console.log(round)
 	return round
 }
 
@@ -52,10 +51,35 @@ function orderByYear(moviesArray) {
 }
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically(moviesArray) {}
+function orderAlphabetically(moviesArray) {
+	const movies = moviesArray.sort((a, b) => a.title.localeCompare(b.title))
+	return movies.map((m, i) => {
+		if (i <= 19) {
+			return m.title
+		}
+	})
+}
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes(moviesArray) {}
+function turnHoursToMinutes(moviesArray) {
+	const hours = moviesArray.map((m) => {
+		if (m.duration.length > 2) {
+			const duration =
+				parseInt(m.duration.slice(0)) * 60 + parseInt(m.duration.slice(3.2))
+			return {
+				...m,
+				duration: duration,
+			}
+		} else {
+			const duration = parseInt(m.duration.slice(0)) * 60
+			return {
+				...m,
+				duration: duration,
+			}
+		}
+	})
+	return hours
+}
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(moviesArray) {}
