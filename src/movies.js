@@ -49,6 +49,9 @@ function orderByYear(moviesArray) {
 		})
 	return movies
 }
+// const sorted = array.slice().sort((a, b) => a.year !== b.year
+// ? a.year - b.year
+// : a.title.localeCompare(b.title));
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically(moviesArray) {
@@ -59,6 +62,7 @@ function orderAlphabetically(moviesArray) {
 		}
 	})
 }
+// const sortedTitles = moviesArray.slice().sort((a,b) => a.title.localeCompare(b.title)).map(x => x.title).slice(0, 20);
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes(moviesArray) {
@@ -80,6 +84,47 @@ function turnHoursToMinutes(moviesArray) {
 	})
 	return hours
 }
+// function turnHoursToMinutes(moviesArray) {
+//   return moviesArray.map(m => {
+//     const match = m.duration.match(/(?:(\d+)h)?(?: *(\d+)min)?/);
+//     const hours = match[1] ? parseInt(match[1]) : 0;
+//     const minutes = match[2] ? parseInt(match[2]) : 0;
+//     return { ...m, duration: hours * 60 + minutes };
+//   });
+// }
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
-function bestYearAvg(moviesArray) {}
+function bestYearAvg(moviesArray) {
+	if (moviesArray.length === 0) return null
+	console.log(moviesArray)
+	const yearsScores = {}
+
+	moviesArray.map((m) => {
+		if (!yearsScores[m.year]) {
+			yearsScores[m.year] = {
+				score: m.score,
+				count: 1,
+			}
+		} else {
+			yearsScores[m.year].score += m.score
+			yearsScores[m.year].count++
+		}
+	})
+	console.log('years: ', yearsScores)
+
+	let bestYear = 2025
+	let bestAvgScore = -Infinity
+
+	for (const year in yearsScores) {
+		const { score, count } = yearsScores[year]
+		const avgScore = score / count
+
+		if (avgScore > bestAvgScore) {
+			bestAvgScore = avgScore
+			bestYear = Math.min(year, bestYear)
+		}
+	}
+
+	console.log('score: ', bestAvgScore, ', year: ', bestYear)
+	return `The best year was ${bestYear} with an average score of ${bestAvgScore}`
+}
