@@ -128,3 +128,21 @@ function bestYearAvg(moviesArray) {
 	console.log('score: ', bestAvgScore, ', year: ', bestYear)
 	return `The best year was ${bestYear} with an average score of ${bestAvgScore}`
 }
+// function bestYearAvg(moviesArray) {
+//   if(!moviesArray.length) return null;
+//   const yearMap = {};
+//   for(const movie of moviesArray){
+//     if(!yearMap[movie.year]) yearMap[movie.year] = [];
+//     yearMap[movie.year].push(movie.score);
+//   }
+//   let bestYear = 0;
+//   let bestAvg = 0;
+//   for(const year in yearMap){
+//     const avg = yearMap[year].reduce((a,c)=>a+c,0)/yearMap[year].length;
+//     if(avg > bestAvg || (avg === bestAvg && year < bestYear)){
+//       bestAvg = avg;
+//       bestYear = year;
+//     }
+//   }
+//   return `The best year was ${bestYear} with an average score of ${bestAvg.toFixed(2)}`;
+// }
